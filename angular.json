@@ -1,0 +1,180 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "blackbox-app": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/blackbox-app",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css",
+              "src/assets/global/plugins/font-awesome/css/font-awesome.min.css",
+              "src/assets/global/plugins/simple-line-icons/simple-line-icons.min.css",
+              "src/assets/global/plugins/bootstrap/css/bootstrap.min.css",
+              "src/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css",
+              "src/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css",
+              "src/assets/global/plugins/morris/morris.css",
+              "src/assets/global/plugins/fullcalendar/fullcalendar.min.css",
+              "src/assets/global/plugins/jqvmap/jqvmap/jqvmap.css",
+              "src/assets/global/css/components.min.css",
+              "src/assets/global/css/plugins.min.css",
+              "src/assets/layouts/layout3/css/layout.min.css",
+              "src/assets/layouts/layout3/css/themes/default.min.css",
+              "src/assets/layouts/layout3/css/custom.min.css"
+            ],
+            "scripts": [
+              "src/assets/global/plugins/jquery.min.js",
+              "src/assets/global/plugins/bootstrap/js/bootstrap.min.js",
+              "src/assets/global/plugins/js.cookie.min.js",
+              "src/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+              "src/assets/global/plugins/jquery.blockui.min.js",
+              "src/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
+              "src/assets/global/plugins/moment.min.js",
+              "src/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js",
+              "src/assets/global/plugins/morris/morris.min.js",
+              "src/assets/global/plugins/morris/raphael-min.js",
+              "src/assets/global/plugins/counterup/jquery.waypoints.min.js",
+              "src/assets/global/plugins/counterup/jquery.counterup.min.js",
+              "src/assets/global/plugins/fullcalendar/fullcalendar.min.js",
+              "src/assets/global/plugins/flot/jquery.flot.min.js",
+              "src/assets/global/plugins/flot/jquery.flot.resize.min.js",
+              "src/assets/global/plugins/flot/jquery.flot.categories.min.js",
+              "src/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js",
+              "src/assets/global/plugins/jquery.sparkline.min.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js",
+              "src/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js",
+              "src/assets/global/scripts/app.min.js",
+              "src/assets/pages/scripts/dashboard.min.js",
+              "src/assets/layouts/layout3/scripts/layout.min.js",
+              "src/assets/layouts/layout3/scripts/demo.min.js",
+              "src/assets/layouts/global/scripts/quick-sidebar.min.js",
+              "src/assets/layouts/global/scripts/quick-nav.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "blackbox-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "blackbox-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "blackbox-app:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "blackbox-app-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "blackbox-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "blackbox-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "blackbox-app"
+}
