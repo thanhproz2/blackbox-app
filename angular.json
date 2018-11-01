@@ -20,7 +20,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/translations"
             ],
             "styles": [
               "src/styles.css",
@@ -47,6 +48,9 @@
               "src/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js",
               "src/assets/global/plugins/moment.min.js",
               "src/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js",
+              "src/assets/global/plugins/jquery-validation/js/jquery.validate.min.js",
+              "src/assets/global/plugins/jquery-validation/js/additional-methods.min.js",
+              "src/assets/global/plugins/select2/js/select2.full.min.js",
               "src/assets/global/plugins/morris/morris.min.js",
               "src/assets/global/plugins/morris/raphael-min.js",
               "src/assets/global/plugins/counterup/jquery.waypoints.min.js",
