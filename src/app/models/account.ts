@@ -5,3 +5,8 @@ export class Login {
         public grecaptchaResponse: string
     ) { }
 }
+export class ForgetPassword{
+    constructor(
+        public email: string
+    ){}
+}

@@ -14,18 +14,21 @@
         <label class="control-label visible-ie8 visible-ie9" for="username">{{'username_field' | translate}}</label>
         <input class="form-control form-control-solid placeholder-no-fix" type="text" placeholder="{{'username_field' | translate}}"
           name="username" required [(ngModel)]="model.username" #username="ngModel" autocomplete="off" />
-      </div>
-      <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
-        <span>Username is required</span>
+        <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+          <span>Username is required</span>
+        </div>
       </div>
       <div class="form-group">
         <label class="control-label visible-ie8 visible-ie9">{{'password_field' | translate}}</label>
         <input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off"
           placeholder="{{'password_field' | translate}}" name="password" required [(ngModel)]="model.password"
           #password="ngModel" />
-      </div>
-      <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-        <span>Password is required</span>
+        <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+          <span>Password is required</span>
+        </div>
+        <div [hidden]='failedLogin' class="alert alert-danger">
+          <span>{{txtFailedLogin}}</span>
+        </div>
       </div>
       <div class="form-actions">
         <button [disabled]="!login.form.valid" class="btn green uppercase" (click)=loginSubmit(model.username,model.password)>Login</button>
@@ -35,7 +38,7 @@
         </label>
         <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
       </div>
-      <div class="login-options">
+      <!-- <div class="login-options">
         <h4>Or login with</h4>
         <ul class="social-icons">
           <li>
@@ -51,7 +54,7 @@
             <a class="social-icon-color linkedin" data-original-title="Linkedin" href="javascript:;"></a>
           </li>
         </ul>
-      </div>
+      </div> -->
       <div class="create-account">
         <p>
           <a href="javascript:;" id="register-btn" class="uppercase">Create an account</a>
@@ -60,15 +63,24 @@
     </form>
     <!-- END LOGIN FORM -->
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form class="forget-form" action="index.html" method="post">
+    <form class="forget-form" #forget="ngForm">
       <h3 class="font-green">Forget Password ?</h3>
       <p> Enter your e-mail address below to reset your password. </p>
       <div class="form-group">
-        <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" />
+        <input class="form-control placeholder-no-fix" type="email" autocomplete="off" placeholder="Email" required  name="email" [(ngModel)]="models.email"
+        #email="ngModel" (keyup)="checkEmails(models.email)"/>
+        <div [hidden]='failedForget' class="alert alert-danger">
+          <span>{{txtForget}}</span>
+        </div>
+        <div [hidden]='successfulForget' class="alert alert-success">
+          <span>{{txtForget}}</span>
+        </div>
       </div>
+
       <div class="form-actions">
         <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
-        <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+        <button type="submit" class="btn btn-success uppercase pull-right" (click)='getPasswordSubmit(models.email)' [disabled]="checkEmail" >Submit</button>
+        
       </div>
     </form>
     <!-- END FORGOT PASSWORD FORM -->

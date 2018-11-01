@@ -49,4 +49,21 @@ export class AuthenticationServiceService {
   logOut() {
     this._cookieService.delete(this._constants.auth_key);
   }
+
+  getPassword(email: string) {
+    return this.http.post(this.apiUrl.forgot_password,
+      {
+        username: email
+      },
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/vnd.blackbox.v1+json'
+        })
+      }
+    ).pipe((response)=>{
+      return response;
+    },function errorCallback(response) {
+      return response;
+    });
+  }
 }

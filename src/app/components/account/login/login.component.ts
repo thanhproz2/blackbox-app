@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from "../../../models/account";
+import { Login, ForgetPassword } from "../../../models/account";
 import { AuthenticationServiceService } from "../../../services/security/authentication-service.service"
 import { Router } from '@angular/router';
 import { AppComponent } from '../../../app.component';
@@ -20,8 +20,18 @@ declare var jQuery: any;
 })
 export class LoginComponent implements OnInit {
   model = new Login('', '', '');
+  models = new ForgetPassword('');
   public authenticationService;
   private grecaptchaResponse: string = '';
+
+  checkEmail: boolean = true;
+  failedLogin: boolean = true;
+  txtFailedLogin: string = '';
+  failedForget: boolean = true;
+  txtForget: string = '';
+  successfulForget: boolean=true;
+
+
 
   constructor(public _authenticationServiceService: AuthenticationServiceService, private _router: Router,
     private _appComponent: AppComponent
@@ -274,13 +284,41 @@ export class LoginComponent implements OnInit {
   loginSubmit(username: string, password: string) {
 
     this._authenticationServiceService.login(username, password, this.grecaptchaResponse)
-      .subscribe((result) => {
-        if (result) {
+      .subscribe((result:any) => {
+
+        if (result.success) {
           this._authenticationServiceService.saveCookie(result);
           this._appComponent.ngOnInit();
+          console.log(result);
+        }else{
+          this.failedLogin=false;
+          this.txtFailedLogin=result.message;
           console.log(result);
         }
       })
   }
 
+  getPasswordSubmit(email: string) {
+    this._authenticationServiceService.getPassword(email)
+      .subscribe((result: any) => {
+        if (result.success) {
+          this.successfulForget=false;
+          this.txtForget=result.message;
+        }else{
+          this.failedForget=false;
+          this.txtForget=result.message;
+        }
+        console.log(result);
+      })
+  }
+
+  checkEmails(emaill: string){
+    var cemail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!cemail.test(emaill)) {
+      this.checkEmail = true;
+    }
+    else {
+      this.checkEmail = false;
+    }
+  }
 }
